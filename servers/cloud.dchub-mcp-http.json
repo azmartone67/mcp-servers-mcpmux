@@ -1,0 +1,71 @@
+{
+  "$schema": "../schemas/server-definition.schema.json",
+  "id": "cloud.dchub-mcp-http",
+  "name": "DC Hub",
+  "alias": "dchub",
+  "description": "Live data layer for data-center site selection: daily Data Center Power Index (DCPI) scores of where data centers can get grid power across 300+ markets, plus grid, fiber, gas and interconnection-queue data, with a free tier that needs no key.",
+  "logo": "https://dchub.cloud/icons/icon-512.png",
+  "schema_version": "2.1",
+  "categories": [
+    "database",
+    "search"
+  ],
+  "tags": [
+    "data-center",
+    "site-selection",
+    "power-grid",
+    "energy",
+    "fiber",
+    "interconnection-queue",
+    "dcpi"
+  ],
+  "transport": {
+    "type": "http",
+    "url": "https://dchub.cloud/mcp",
+    "headers": {
+      "X-API-Key": "${input:DCHUB_API_KEY}"
+    },
+    "metadata": {
+      "inputs": [
+        {
+          "id": "DCHUB_API_KEY",
+          "label": "DC Hub API Key",
+          "description": "Optional. The free tier works with no key; a DC Hub API key unlocks full reports and higher limits.",
+          "type": "text",
+          "required": false,
+          "secret": true,
+          "placeholder": "dchub_...",
+          "obtain": {
+            "url": "https://dchub.cloud/connect",
+            "instructions": "1. Open dchub.cloud/connect\n2. Request a free key with your email (or pick a plan)\n3. Copy the key (starts with dchub_)",
+            "button_label": "Get API Key"
+          }
+        }
+      ]
+    }
+  },
+  "auth": {
+    "type": "optional_api_key",
+    "instructions": "Works without a key on the free tier. Add a DC Hub API key via the X-API-Key header for full reports; get one at dchub.cloud/connect."
+  },
+  "contributor": {
+    "name": "DC Hub",
+    "github": "azmartone67",
+    "url": "https://dchub.cloud"
+  },
+  "links": {
+    "repository": "https://github.com/azmartone67/dchub-mcp-server",
+    "homepage": "https://dchub.cloud",
+    "documentation": "https://dchub.cloud/developers"
+  },
+  "platforms": [
+    "all"
+  ],
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": true,
+    "read_only_mode": false
+  },
+  "changelog_url": "https://github.com/azmartone67/dchub-mcp-server/releases"
+}
